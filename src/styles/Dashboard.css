@@ -1,0 +1,19 @@
+.sidebar-links li{
+font-size: 14px;
+}
+.navbar{
+width: calc(100vw - 64px);
+}
+.community-section {
+    width: 100vw; /* Ensure the section takes full width of the viewport */
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 16px; /* Optional, for slight padding */
+  }
+  
+  .community-main-content {
+    flex: 1; /* This makes sure the content fills the available space */
+    padding: 16px; /* Ensure the content has some padding */
+  }
+  

@@ -1,0 +1,9 @@
+.footer{
+ color: whitesmoke;    
+ margin-left: -20px;
+ background-color: #106687;
+  }
+.column-footer{
+    display: grid;
+    grid-template-columns: (3,1fr);
+}

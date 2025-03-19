@@ -1,0 +1,42 @@
+.nav{
+    border-bottom: 0.5px solid #7a7979; 
+  
+  
+    
+}
+
+.nav-menu{
+padding: 1px;
+height: 50px;
+padding-left: 3rem;
+padding-right:3rem ;
+}
+.nav-button{
+    width: 70px;
+    height: 35px;
+    padding: 2px;
+    background-color: #106687;
+    border-radius: 18px;
+    color: white;
+    margin-top: -5px;
+}
+.language{
+    cursor: pointer;
+}
+.nav-heading p span{
+    cursor: pointer;
+}
+.logoname{
+    color:  #00A6CD;
+    font-size: 18px;
+}
+.menu-list{
+    font-size: 14px;
+}
+.menu-list li{
+display: flex;
+margin-left: 52px;
+}
+.menu-list ul{
+    margin-top: -30px;
+}
