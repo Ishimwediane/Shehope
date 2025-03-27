@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import '../styles/signin.css';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -88,7 +89,7 @@ const SignIn = () => {
 
         <p className="text-gray-600 text-center mt-4">
           Don't have an account?{" "}
-          <a href="/register" className="text-blue-500">Sign up</a>
+          <Link to="/Register" className="text-blue-500">Sign up</Link>
         </p>
       </div>
     </div>

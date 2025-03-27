@@ -34,7 +34,7 @@ const Settings = () => {
   };
 
   return (
-    <div className="flex ml-64 mt-15 p-6 bg-gray-100 dark:bg-gray-900 min-h-screen">
+    <div className="flex ml-6 mt-15 p-6 bg-gray-100 dark:bg-gray-900 min-h-screen">
       <div className="max-w-7xl mx-auto w-full">
         <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-8">Settings</h2>
 
@@ -45,7 +45,7 @@ const Settings = () => {
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Account Settings</h3>
             <button
               onClick={() => navigate("/Profile")}
-              className="w-full p-3 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition duration-300"
+              className="w-32 p-3 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition duration-300"
             >
               Edit Profile
             </button>

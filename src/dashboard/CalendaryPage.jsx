@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -8,22 +7,19 @@ const CalendaryPage = () => {
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
-  const [showForm, setShowForm] = useState(false); // State to toggle form visibility
-  const [editingEventId, setEditingEventId] = useState(null); // State to track which event is being edited
+  const [showForm, setShowForm] = useState(false);
+  const [editingEventId, setEditingEventId] = useState(null);
 
-  // Retrieve userId from local storage
-  const userId = localStorage.getItem('userId'); // Ensure this is set during sign-in
+  const userId = localStorage.getItem('userId');
 
   const fetchEvents = async () => {
     try {
       const response = await axios.get(`http://localhost:5000/api/events/${userId}`);
       const updatedEvents = response.data.map(event => {
         const eventDate = new Date(event.date);
-        const today = new Date();
-        // Set status based on the event date
         return {
           ...event,
-          status: eventDate < today ? 'Completed' : 'Upcoming',
+          status: eventDate < new Date() ? 'Completed' : 'Upcoming',
         };
       });
       setEvents(updatedEvents);
@@ -36,19 +32,16 @@ const CalendaryPage = () => {
     e.preventDefault();
     try {
       if (editingEventId) {
-        // Update existing event
         const response = await axios.put(`http://localhost:5000/api/events/${editingEventId}`, {
           title,
           description,
           date,
           time,
         });
-        // Update the event in the state
         setEvents((prevEvents) =>
           prevEvents.map((event) => (event._id === editingEventId ? { ...event, ...response.data.event } : event))
         );
       } else {
-        // Create new event
         const response = await axios.post('http://localhost:5000/api/events', {
           userId,
           title,
@@ -56,12 +49,7 @@ const CalendaryPage = () => {
           date,
           time,
         });
-        // Automatically set the status based on the date
-        const newEvent = {
-          ...response.data.event,
-          status: new Date(date) < new Date() ? 'Completed' : 'Upcoming',
-        };
-        setEvents((prevEvents) => [...prevEvents, newEvent]);
+        setEvents([...events, response.data.event]);
       }
       resetForm();
     } catch (error) {
@@ -72,16 +60,16 @@ const CalendaryPage = () => {
   const handleEdit = (event) => {
     setTitle(event.title);
     setDescription(event.description);
-    setDate(event.date.split('T')[0]); // Format date for input
+    setDate(event.date.split('T')[0]);
     setTime(event.time);
     setEditingEventId(event._id);
-    setShowForm(true); // Show the form for editing
+    setShowForm(true);
   };
 
   const handleDelete = async (eventId) => {
     try {
       await axios.delete(`http://localhost:5000/api/events/${eventId}`);
-      setEvents((prevEvents) => prevEvents.filter((event) => event._id !== eventId));
+      setEvents(events.filter(event => event._id !== eventId));
     } catch (error) {
       console.error('Error deleting event:', error);
     }
@@ -93,7 +81,7 @@ const CalendaryPage = () => {
     setDate('');
     setTime('');
     setEditingEventId(null);
-    setShowForm(false); // Hide the form after submission
+    setShowForm(false);
   };
 
   useEffect(() => {
@@ -101,67 +89,35 @@ const CalendaryPage = () => {
   }, []);
 
   return (
-    <div className="ml-70 mt-20 container mx-auto p-6">
+    <div className="ml-12 mt-20 container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6 text-center">My Activities</h1>
-      
-      {/* Button to toggle form visibility */}
       <button 
-        onClick={() => setShowForm(!showForm)} 
+        onClick={() => setShowForm(true)} 
         className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition duration-200 mb-4"
       >
-        {showForm ? 'Cancel' : 'Create Activity'}
+        Create Activity
       </button>
 
-      {/* Event Form */}
       {showForm && (
-        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4">{editingEventId ? 'Edit Event' : 'Create Activity'}</h2>
-          <div className="mb-4">
-            <label className="block mb-1 font-medium">Title</label>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-              className="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 className="text-xl font-semibold mb-4">{editingEventId ? 'Edit Event' : 'Create Activity'}</h2>
+            <form onSubmit={handleSubmit}>
+              <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" className="border rounded w-full p-2 mb-2" required />
+              <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" className="border rounded w-full p-2 mb-2" />
+              <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="border rounded w-full p-2 mb-2" required />
+              <input type="time" value={time} onChange={(e) => setTime(e.target.value)} className="border rounded w-full p-2 mb-2" />
+              <div className="flex justify-end">
+                <button type="button" onClick={resetForm} className="bg-gray-400 text-white px-3 py-2 rounded mr-2">Cancel</button>
+                <button type="submit" className="bg-blue-600 text-white px-3 py-2 rounded">{editingEventId ? 'Update' : 'Create'}</button>
+              </div>
+            </form>
           </div>
-          <div className="mb-4">
-            <label className="block mb-1 font-medium">Description</label>
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block mb-1 font-medium">Date</label>
-            <input
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              required
-              className="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block mb-1 font-medium">Time</label>
-            <input
-              type="time"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
-              className="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <button type="submit" className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition duration-200">
-            {editingEventId ? 'Update Event' : 'Create Activity'}
-          </button>
-        </form>
+        </div>
       )}
-
-      {/* Event List */}
-      <div className="overflow-x-auto">
-        <table className="min-w-full border-collapse border border-gray-200">
+      
+      <div className="mt-10 mb-20 overflow-x-auto w-full">
+        <table className="w-full border-collapse border border-gray-200 text-sm">
           <thead className="bg-gray-100">
             <tr>
               <th className="border border-gray-200 p-2">Title</th>
@@ -169,7 +125,7 @@ const CalendaryPage = () => {
               <th className="border border-gray-200 p-2">Date</th>
               <th className="border border-gray-200 p-2">Time</th>
               <th className="border border-gray-200 p-2">Status</th>
-              <th className="border border-gray-200 p-2">Actions </th>
+              <th className="border border-gray-200 p-2">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -180,17 +136,13 @@ const CalendaryPage = () => {
                 <td className="border border-gray-200 p-2">{new Date(event.date).toLocaleDateString()}</td>
                 <td className="border border-gray-200 p-2">{event.time}</td>
                 <td className="border border-gray-200 p-2">
-                  <span className={`inline-block px-2 py-1 text-xs font-semibold rounded-full ${event.status === 'Completed' ? 'bg-green-200 text-green-800' : 'bg-yellow-200 text-yellow-800'}`}>
+                  <span className={`inline-block px-2 py-1 text-xs font-semibold rounded-full ${event.status === 'Completed' ? 'bg-blue-200 text-blue-800' : 'bg-gray-200 text-gray-800'}`}>
                     {event.status}
                   </span>
                 </td>
                 <td className="border border-gray-200 p-2">
-                  <button onClick={() => handleEdit(event)} className="bg-yellow-500 text-white p-1 rounded hover:bg-yellow-600 transition duration-200 mr-2">
-                    Edit
-                  </button>
-                  <button onClick={() => handleDelete(event._id)} className="bg-red-500 text-white p-1 rounded hover:bg-red-600 transition duration-200">
-                    Delete
-                  </button>
+                  <button onClick={() => handleEdit(event)} className="bg-blue-500 text-white p-1 rounded hover:bg-blue-600 mr-2">Edit</button>
+                  <button onClick={() => handleDelete(event._id)} className=" bg-blue-500 text-white p-1 rounded hover:bg-blue-600">Delete</button>
                 </td>
               </tr>
             ))}

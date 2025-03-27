@@ -12,3 +12,18 @@ margin-left: -100px;
     width: 400px;
     height: 200px;
 }
+
+
+  /* Home.css */
+.stats-container {
+    display: flex;
+    width: 400%; /* To accommodate 4 statistics */
+    position: absolute;
+  }
+  
+  .stat-card {
+    flex-shrink: 0;
+    width: 25%; /* Each stat takes 1/4th of the container's width */
+    padding: 0 1rem;
+  }
+  

@@ -1,9 +1,10 @@
-import React from "react";
+import React  from "react";
 import { CheckCircle } from "lucide-react"; 
 import { FaHeart } from "react-icons/fa";
 import { FaComment } from "react-icons/fa"; // FaComment moved to fa6 in the latest versions
 import prof from "../image/prof.jpg"
-
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import AOS styles
 import stories from "./Stories"
 
 import cover from "../image/cover1.png";
@@ -11,12 +12,31 @@ import join from "../image/freind.jpeg"
 import pregnancy from "../image/pregnancy.jpg"
 import sick from "../image/sick.jpg"
 import '../styles/Home.css'
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const handlecommunity = () => {
+    navigate("/Community"); // Navigate to the /Community path
+  };
+
+  const handlesupport = () => {
+    navigate("/Support"); // Navigate to the /Community path
+  };
+
+  const handledonate = () => {
+    navigate("/Donate"); // Navigate to the /Community path
+  };
+
+   useEffect(() => {
+      AOS.init({ duration: 1000 }); // Initialize AOS with a duration of 1000ms
+    }, []);
   return (
     <>
     <div className=" hero-section  flex  px-5 ">
-      <div className=" flex gap-8">
+      <div className=" flex gap-8" data-aos="fade-right">
         {/* Left Side - Text Content */}
         <div className="flex flex-col ml-40 mt-20">
           <h1 className="text-4xl f text-white " style={{ letterSpacing: '0.3rem', fontFamily: 'Bonheur Royale, serif' }}>
@@ -27,7 +47,9 @@ const Home = () => {
           Hope means knowing you're not alone.
           Every woman deserves <br />a future filled with hope and possibility.
           </p><br />
-          <button class="bg-white text-blue-500 font-semibold py-2 w-40 px-4 rounded-lg shadow-md hover:bg-gray-200">
+          <button
+          onClick={handlesupport }
+          class="bg-white text-blue-500 cursor-pointer font-semibold py-2 w-40 px-4 rounded-lg shadow-md hover:bg-gray-200">
   Get Support
 </button>
         </div>
@@ -44,7 +66,7 @@ const Home = () => {
     </div>
 
 <br /><br />
-    <div className="flex mt-6 items-center bg-gray-100 p-8 ml-40 rounded-2xl shadow-lg max-w-5xl mx-auto">
+    <div className="flex mt-6 items-center bg-gray-100 p-8 ml-40 rounded-2xl shadow-lg max-w-5xl mx-auto" data-aos="fade-down">
       <img 
         src={pregnancy} 
         alt="" 
@@ -64,7 +86,7 @@ const Home = () => {
 
 
 
-    <div className="flex  mt-10 items-center bg-white p-8 rounded-2xl shadow-lg max-w-5xl mx-auto">
+    <div className="flex  mt-10 items-center bg-white p-8 rounded-2xl shadow-lg max-w-5xl mx-auto" data-aos="fade-down">
       <div className="w-1/2 space-y-4">
         <h2 className="text-2xl font-bold">Support Young Women, Empower Their Future</h2>
         <p className="text-gray-600">
@@ -76,7 +98,9 @@ const Home = () => {
           <li className="flex items-center"><CheckCircle className="text-green-500 mr-2" />  Help provide immediate aid for young women in crisis situations.</li>
           <li className="flex items-center"><CheckCircle className="text-green-500 mr-2" /> Support programs that equip young women with the knowledge to make informed decisions about their futures.</li>
         </ul>
-        <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-600">
+        <button 
+        onClick={handledonate}
+        className="bg-blue-500 cursor-pointer text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-600">
         Donate now
         </button>
       </div>
@@ -89,7 +113,7 @@ const Home = () => {
       </div>
     </div>
 
-    <section className="bg-gray-200 py-16 px-6">
+    <section className="bg-gray-200 py-16 px-6" data-aos="fade-right">
       {/* Centered Title */}
       <h2 className="absolute  ml-120 mt-50 text-3xl font-bold ">
       Shared Stories
@@ -176,12 +200,14 @@ const Home = () => {
       </div>
     </section>
     
-    <div className="relative mt-20 mb-10 bg-sky-800 text-white p-8 rounded-2xl flex items-center justify-between shadow-lg max-w-4xl mx-auto">
+    <div className="relative mt-20 mb-10 bg-sky-800 text-white p-8 rounded-2xl flex items-center justify-between shadow-lg max-w-4xl mx-auto" data-aos="fade-up">
       <div className="space-y-4 ml-10">
         <h2 className="text-2xl font-bold">Join Our Supportive Community</h2>
         <h3 className="text-xl">Be part of a compassionate community that understands and </h3>
         <p className="text-sm">supports you every step of the way.</p>
-        <button className="bg-white text-blue-500 font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-200">
+        <button 
+        onClick={handlecommunity}
+        className="bg-white text-blue-500 cursor-pointer font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-200">
           Join community
         </button>
       </div>

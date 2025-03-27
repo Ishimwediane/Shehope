@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -44,7 +44,7 @@ const Register = () => {
   const password = watch("password");
 
   return (
-    <div className="flex h-screen bg-gradient-to-r from-[#106687] to-white">
+    <div className="mt-12 flex h-screen bg-gradient-to-r from-[#106687] to-white">
       {/* Main Form Container */}
       <div className="w-1/2 flex flex-col justify-center items-center p-10 min-h-screen">
         <h1 className="text-3xl font-bold text-gray-800">Create an Account</h1>
@@ -126,7 +126,7 @@ const Register = () => {
         </form>
 
         <p className="mt-4 text-gray-600">
-          Already have an account? <a href="/login" className="text-[#106687]">Sign in</a>
+          Already have an account? <Link to= "/SignIn" className="text-[#106687]">Sign in</Link>
         </p>
       </div>
 
