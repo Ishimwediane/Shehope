@@ -23,11 +23,13 @@ import Account from './components/Account.jsx';
 import AdminLayout from './admin/AdminLayout.jsx'
 import AdminView from './admin/AdminView.jsx'
 import UserManagement from './admin/UserManagment.jsx';
-import Donation from './admin/Donation.jsx'
+import Request from './admin/Request.jsx'
 import SupportPage from './admin/SupportPage.jsx';
 import CommunityPage from './admin/CommunityPage.jsx';
 import CalendaryScheduler from './admin/CalendaryScheduler.jsx';
 import CommunityUser from './components/CommunityUser.jsx';
+import Recommendation from './admin/Recommendation.jsx';
+import DonationRequest from './dashboard/DonationRequest.jsx';
 
 function App() {
   return (
@@ -46,6 +48,7 @@ function App() {
               <Route path='/Account' element={<Account />} /> 
               <Route path='/Calendary' index element={<CalendaryPage />} />
               <Route path='/Settings' index element={<Settings />} />
+              <Route path='/request' index element={<DonationRequest />} />
               <Route path='/Profile' index element={<Profile />} /> 
               <Route path='/Register' index element={<Register />} />
             <Route path='/SignIn' index element={<SignIn />} />
@@ -54,9 +57,10 @@ function App() {
           <Route  path='/' element={<AdminLayout />}>
           <Route  path='/Admin' element={<AdminView />}/>
           <Route  path='/user' element={<UserManagement />}/>
-          <Route  path='/donation' element={<Donation />}/>
+          <Route  path='/donation' element={<Request />}/>
           <Route  path='/supportpage' element={<SupportPage />}/>
           <Route  path='/communitypage' element={<CommunityPage />}/>
+          <Route  path='/recommendation' element={<Recommendation />}/>
           <Route  path='/calendaryscheduler' element={<CalendaryScheduler />}/>
           </Route>
            

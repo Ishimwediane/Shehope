@@ -71,6 +71,15 @@ const Account = ({ isOpen, onClose, userName }) => {
                     </li>
                     <li>
                         <Link
+                            to="/request"
+                            onClick={handleLinkClick} // Close sidebar on link click
+                            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700"
+                        >
+                            <FileText size={14} /> Request support
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
                             to="/Settings"
                             onClick={handleLinkClick} // Close sidebar on link click
                             className="flex items-center mt-36 gap-3 p-3 rounded-lg hover:bg-gray-700"

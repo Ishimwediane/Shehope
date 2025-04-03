@@ -12,6 +12,7 @@ const CalendaryPage = () => {
 
   const userId = localStorage.getItem('userId');
 
+  // Fetch events when the component mounts
   const fetchEvents = async () => {
     try {
       const response = await axios.get(`http://localhost:5000/api/events/${userId}`);
@@ -28,69 +29,65 @@ const CalendaryPage = () => {
     }
   };
 
+  useEffect(() => {
+    fetchEvents(); // Fetch events on component mount
+  }, []);
+
+  // Submit new or edited event
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const eventData = { title, description, date, time, userId };
+
     try {
       if (editingEventId) {
-        const response = await axios.put(`http://localhost:5000/api/events/${editingEventId}`, {
-          title,
-          description,
-          date,
-          time,
-        });
-        setEvents((prevEvents) =>
-          prevEvents.map((event) => (event._id === editingEventId ? { ...event, ...response.data.event } : event))
-        );
+        // Update existing event
+        await axios.put(`http://localhost:5000/api/events/${editingEventId}`, eventData);
       } else {
-        const response = await axios.post('http://localhost:5000/api/events', {
-          userId,
-          title,
-          description,
-          date,
-          time,
-        });
-        setEvents([...events, response.data.event]);
+        // Create new event
+        await axios.post('http://localhost:5000/api/events', eventData);
       }
-      resetForm();
+
+      resetForm(); // Reset form after submission
+      fetchEvents(); // Fetch updated events
     } catch (error) {
       console.error('Error saving event:', error);
     }
   };
 
-  const handleEdit = (event) => {
-    setTitle(event.title);
-    setDescription(event.description);
-    setDate(event.date.split('T')[0]);
-    setTime(event.time);
-    setEditingEventId(event._id);
-    setShowForm(true);
-  };
-
-  const handleDelete = async (eventId) => {
-    try {
-      await axios.delete(`http://localhost:5000/api/events/${eventId}`);
-      setEvents(events.filter(event => event._id !== eventId));
-    } catch (error) {
-      console.error('Error deleting event:', error);
-    }
-  };
-
+  // Reset form state
   const resetForm = () => {
     setTitle('');
     setDescription('');
     setDate('');
     setTime('');
-    setEditingEventId(null);
     setShowForm(false);
+    setEditingEventId(null);
   };
 
-  useEffect(() => {
-    fetchEvents();
-  }, []);
+  // Edit an event
+  const handleEdit = (event) => {
+    setTitle(event.title);
+    setDescription(event.description);
+    setDate(event.date);
+    setTime(event.time);
+    setEditingEventId(event._id); // Set the ID of the event being edited
+    setShowForm(true); // Show the form for editing
+  };
+
+  // Delete an event
+  const handleDelete = async (eventId) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/events/${eventId}`);
+      fetchEvents(); // Fetch events after deletion
+    } catch (error) {
+      console.error('Error deleting event:', error);
+    }
+  };
 
   return (
     <div className="ml-12 mt-20 container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6 text-center">My Activities</h1>
+      
       <button 
         onClick={() => setShowForm(true)} 
         className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition duration-200 mb-4"
@@ -99,7 +96,7 @@ const CalendaryPage = () => {
       </button>
 
       {showForm && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <div className="fixed inset-0 flex bg-gray-500 bg-opacity-50  justify-center items-center ">
           <div className="bg-white p-6 rounded-lg shadow-lg w-96">
             <h2 className="text-xl font-semibold mb-4">{editingEventId ? 'Edit Event' : 'Create Activity'}</h2>
             <form onSubmit={handleSubmit}>
@@ -115,7 +112,7 @@ const CalendaryPage = () => {
           </div>
         </div>
       )}
-      
+
       <div className="mt-10 mb-20 overflow-x-auto w-full">
         <table className="w-full border-collapse border border-gray-200 text-sm">
           <thead className="bg-gray-100">
@@ -142,7 +139,7 @@ const CalendaryPage = () => {
                 </td>
                 <td className="border border-gray-200 p-2">
                   <button onClick={() => handleEdit(event)} className="bg-blue-500 text-white p-1 rounded hover:bg-blue-600 mr-2">Edit</button>
-                  <button onClick={() => handleDelete(event._id)} className=" bg-blue-500 text-white p-1 rounded hover:bg-blue-600">Delete</button>
+                  <button onClick={() => handleDelete(event._id)} className="bg-blue-500 text-white p-1 rounded hover:bg-blue-600">Delete</button>
                 </td>
               </tr>
             ))}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import {
   Home,
   Users,
@@ -13,6 +13,7 @@ import {
   BarChart3,
   UserCheck,
   ShieldCheck,
+  LogOut 
 } from "lucide-react";
 import "../styles/Dashboard.css";
 
@@ -25,6 +26,17 @@ const Sidebar = () => {
       setUsername(storedName);
     }
   }, []);
+  const navigate = useNavigate(); // Use navigate for redirection
+
+   // Logout function
+   const handleLogout = () => {
+    // Clear any stored data, e.g., user session, authentication tokens
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
+    navigate("/");
+
+
+  };
 
   return (
     <div className="h-screen w-64 bg-gray-900 text-white p-5 flex flex-col fixed top-0 left-0 overflow-hidden">
@@ -45,13 +57,9 @@ const Sidebar = () => {
               <Users size={18} /> User Management
             </Link>
           </li>
+         
           <li>
             <Link to="/donation" className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700">
-              <DollarSign size={18} /> Donations & Fundraising
-            </Link>
-          </li>
-          <li>
-            <Link to="supportpage" className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700">
               <UserCheck size={18} /> Support Requests
             </Link>
           </li>
@@ -66,11 +74,11 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/admin/resources" className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700">
-              <FileText size={18} /> Legal Resources
+            <Link to="/recommendation" className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700">
+              <FileText size={18} /> Recommendation
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/admin/analytics" className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700">
               <BarChart3 size={18} /> Reports & Analytics
             </Link>
@@ -84,16 +92,14 @@ const Sidebar = () => {
             <Link to="/admin/notifications" className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700">
               <Bell size={18} /> Notifications
             </Link>
-          </li>
-          <li>
-            <Link to="/admin/settings" className="flex items-center mt-10 gap-3 p-3 rounded-lg hover:bg-gray-700">
-              <Settings size={18} /> Settings
-            </Link>
-          </li>
-          <li>
-            <Link to="/admin/help" className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700">
-              <HelpCircle size={18} /> Help & Support
-            </Link>
+          </li> */}
+          <li className="mt-35">
+           <button 
+              onClick={handleLogout} 
+              className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 w-full"
+            >
+              <LogOut size={18} /> Logout
+            </button>
           </li>
         </ul>
       </nav>
