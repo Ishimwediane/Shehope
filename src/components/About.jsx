@@ -79,7 +79,7 @@ const About = () => {
         </section>
 
         <section className="mission-section mb-8 flex" data-aos="fade-up">
-          <div className="relative w-140 h-74 flex">
+          <div className="relative w-140 h-102 flex">
             <section className="about-details-section mb-8 p-6 bg-gray-100 rounded-lg shadow-md">
               <h2 className="text-3xl font-bold text-blue-400 mb-4 text-center">Who we are</h2>
               <p className="text-l text-gray-700 mb-6 text-center">

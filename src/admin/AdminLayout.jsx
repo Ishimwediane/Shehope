@@ -1,14 +1,14 @@
 import React from "react";
 
 import {Outlet} from 'react-router-dom'
-import DashboardNavbar from "../admin/AdminNavbar";
-import Sidebar  from "../admin/Sidebar";
+import AdminNavbar from "./AdminNavbar";
+import Sidebar  from "./Sidebar";
 
 const DashboardLayout =() => {
     return(
         <>
         <Sidebar />
-<DashboardNavbar />
+<AdminNavbar />
 <Outlet />
         </>
     )

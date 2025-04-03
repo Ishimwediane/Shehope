@@ -44,7 +44,7 @@ const Account = ({ isOpen, onClose, userName }) => {
                     </li>
                     <li>
                         <Link
-                            to="/Community"
+                            to="/CommunityUser"
                             onClick={handleLinkClick} // Close sidebar on link click
                             className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700"
                         >

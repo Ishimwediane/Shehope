@@ -19,27 +19,35 @@ const SignIn = () => {
     try {
       console.log("Attempting to login...");
   
-      const response = await axios.post("http://localhost:5000/api/user/login", { email, password });
+      const response = await axios.post("https://shehope-server-1.onrender.com/api/user/login", { email, password });
   
       console.log("Response received:", response.data);
   
       // Extract user data
       const user = response.data.user;
       const token = user?.tokens?.accessToken;
-      const userID=response.data
-      localStorage.setItem("userID", JSON.stringify(userID));
   
       if (user && token) {
         // Store token, user ID, and user name in localStorage
         localStorage.setItem("authToken", token);
         localStorage.setItem("userId", user._id);  // Store user ID
         localStorage.setItem("userName", user.name); // Store user name
-        localStorage.setItem("trimester", user.trimester);  // Store trimester in localStorage
+        localStorage.setItem("trimester", user.trimester);  // Store trimester
+        localStorage.setItem("isAdmin", user.isAdmin);  // Store admin status
   
-       Notify.success("user Login successfull");
+        if (user.isAdmin) {
+          localStorage.setItem("adminToken", token);
+        }
+  
+        Notify.success("User Login successful");
   
         setTimeout(() => {
-          navigate("/Dashboard");
+          if (user.isAdmin) {
+            navigate("/Admin"); // Redirect Admin to Admin Dashboard
+           
+          } else {
+            navigate("/Dashboard"); // Redirect Normal User to Dashboard
+          }
         }, 1000);
       } else {
         setError("Invalid response from the server. Token not found.");
@@ -54,6 +62,7 @@ const SignIn = () => {
       }
     }
   };
+  
   
 
   return (

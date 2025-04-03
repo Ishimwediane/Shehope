@@ -22,7 +22,7 @@ const Register = () => {
         date_of_birth,
       };
   
-      const response = await axios.post("http://localhost:5000/api/user/register", formData, {
+      const response = await axios.post("https://shehope-server-1.onrender.com/api/user/register", formData, {
         headers: { "Content-Type": "application/json" },
       });
   

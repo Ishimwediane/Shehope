@@ -223,7 +223,7 @@ const DonateModal = ({ isOpen, onClose }) => {
               </div>
             )}
 
-            <button className="bg-blue-600 text-white py-2 px-6 mt-4 ml-30 rounded shadow-lg">
+            <button className="bg-blue-600 cursor-pointer text-white py-2 px-6 mt-4 ml-30 rounded shadow-lg">
               Donate Now
             </button>
           </div>

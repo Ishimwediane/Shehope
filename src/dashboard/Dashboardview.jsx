@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { TiPen } from "react-icons/ti";
 
 const DashboardView = () => {
   const [blogs, setBlogs] = useState([]);
@@ -58,9 +59,9 @@ const DashboardView = () => {
   return (
     <div className="flex">
       <div className="flex-1 p-6 ml-12 mt-16">
-        <h1 className="text-3xl font-bold text-[#106687] mb-4">Dashboard</h1>
+        
         <div className="p-6 bg-white">
-          <p className="text-gray-500 text-sm">{today}</p>
+          <p className="text-gray-500 text-sm -mt-10">{today}</p>
           <h2 className="text-3xl font-bold text-blue-500 mt-2">Hello, {userName}</h2>
           <p className="text-2xl font-medium text-black">How can I help you today?</p>
         </div>
@@ -79,7 +80,7 @@ const DashboardView = () => {
             ) : (
               tips.map((tipItem) => (
                 <div key={tipItem._id} className="p-4 bg-gray-100 rounded-lg">
-                  <span className="text-3xl">📚</span>
+                  <span className="text-3xl"><TiPen className="text-blue-300"/></span>
                   <h3 className="text-lg font-semibold mt-2">{tipItem.message}</h3>
                 </div>
               ))
