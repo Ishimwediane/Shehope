@@ -19,7 +19,7 @@ const DashboardView = () => {
 
     const fetchUserData = async () => {
       try {
-        const userResponse = await axios.get(`http://localhost:5000/api/user/${userId}`);
+        const userResponse = await axios.get(`https://shehope-server-1.onrender.com/api/user/${userId}`);
         setTrimester(userResponse.data.trimester);
         setUserName(userResponse.data.name);
       } catch (error) {
@@ -29,7 +29,7 @@ const DashboardView = () => {
 
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/blogs?userId=${userId}`);
+        const response = await axios.get(`https://shehope-server-1.onrender.com/api/blogs?userId=${userId}`);
         setBlogs(response.data);
       } catch (error) {
         console.error("Error fetching blogs:", error.response?.data || error.message);
@@ -38,7 +38,7 @@ const DashboardView = () => {
 
     const fetchTips = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/tips?userId=${userId}`);
+        const response = await axios.get(`https://shehope-server-1.onrender.com/api/tips?userId=${userId}`);
         setTips(response.data);
       } catch (error) {
         console.error("Error fetching tips:", error.response?.data || error.message);

@@ -17,7 +17,7 @@ const CommunityPage = () => {
     try {
       const token = localStorage.getItem('adminToken');
       if (!token) return console.error('No admin token found. Please log in again.');
-      const response = await axios.get('http://localhost:5000/api/admin/posts', {
+      const response = await axios.get('https://shehope-server-1.onrender.com/api/admin/posts', {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log(response.data); // Check the structure here
@@ -38,7 +38,7 @@ const CommunityPage = () => {
     try {
       const token = localStorage.getItem('adminToken');
       if (!token) return;
-      await axios.delete(`http://localhost:5000/api/admin/posts/${postId}`, {
+      await axios.delete(`https://shehope-server-1.onrender.com/api/admin/posts/${postId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchPosts();
@@ -51,7 +51,7 @@ const CommunityPage = () => {
     try {
       const token = localStorage.getItem('adminToken');
       if (!token) return;
-      await axios.delete(`http://localhost:5000/api/admin/posts/${postId}/comments/${commentId}`, {
+      await axios.delete(`https://shehope-server-1.onrender.com/api/admin/posts/${postId}/comments/${commentId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchPosts();
@@ -68,7 +68,7 @@ const CommunityPage = () => {
   const handleResolveReport = async (postId, reportId) => {
     try {
       console.log('Sending request to resolve report...');
-      const response = await fetch(`http://localhost:5000/api/admin/posts/${postId}/reports/${reportId}/resolve`, {
+      const response = await fetch(`https://shehope-server-1.onrender.com/api/admin/posts/${postId}/reports/${reportId}/resolve`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('adminToken')}`,

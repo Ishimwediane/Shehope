@@ -39,7 +39,7 @@ const DonationRequest = () => {
   
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/api/donations", {
+      const response = await fetch("https://shehope-server-1.onrender.com/api/donations", {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${token}`, // Send token

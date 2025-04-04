@@ -22,7 +22,7 @@ export default function CalendarScheduler() {
         return;
       }
   
-      const response = await axios.get('http://localhost:5000/api/admin/event', {
+      const response = await axios.get('https://shehope-server-1.onrender.com/api/admin/event', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -50,7 +50,7 @@ export default function CalendarScheduler() {
 
   const handleAddEvent = () => {
     axios
-      .post("http://localhost:5000/api/admin/event", newEvent, {
+      .post("https://shehope-server-1.onrender.com/api/admin/event", newEvent, {
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("authToken")}`,
           "Content-Type": "application/json",

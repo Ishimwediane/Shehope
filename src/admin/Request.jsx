@@ -18,7 +18,7 @@ const Request = () => {
           return;
         }
 
-        const response = await fetch('http://localhost:5000/api/admin/donations', {
+        const response = await fetch('https://shehope-server-1.onrender.com/api/admin/donations', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -50,7 +50,7 @@ const Request = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/donations/${donationId}`, {
+      const response = await fetch(`https://shehope-server-1.onrender.com/api/admin/donations/${donationId}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,

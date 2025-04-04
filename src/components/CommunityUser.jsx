@@ -4,7 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const fetchPosts = async () => {
-  const response = await fetch("http://localhost:5000/api/posts");
+  const response = await fetch("https://shehope-server-1.onrender.com/api/posts");
   return response.json();
 };
 
@@ -18,7 +18,7 @@ const postMessage = async (postData) => {
   }
 
   try {
-    const response = await fetch("http://localhost:5000/api/posts", {
+    const response = await fetch("https://shehope-server-1.onrender.com/api/posts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +51,7 @@ const likePost = async (postId) => {
   }
 
   try {
-    const response = await fetch(`http://localhost:5000/api/posts/like/${postId}`, {
+    const response = await fetch(`https://shehope-server-1.onrender.com/api/posts/like/${postId}`, {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${token}`,
@@ -80,7 +80,7 @@ const commentOnPost = async (postId, commentText) => {
   }
 
   try {
-    const response = await fetch(`http://localhost:5000/api/posts/comment/${postId}`, {
+    const response = await fetch(`https://shehope-server-1.onrender.com/api/posts/comment/${postId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -112,7 +112,7 @@ const reportPost = async (postId, reportData) => {
   }
 
   try {
-    const response = await fetch(`http://localhost:5000/api/posts/report/${postId}`, {
+    const response = await fetch(`https://shehope-server-1.onrender.com/api/posts/report/${postId}`, {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${token}`,

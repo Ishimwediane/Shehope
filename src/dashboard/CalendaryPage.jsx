@@ -15,7 +15,7 @@ const CalendaryPage = () => {
   // Fetch events when the component mounts
   const fetchEvents = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/events/${userId}`);
+      const response = await axios.get(`https://shehope-server-1.onrender.com/api/events/${userId}`);
       const updatedEvents = response.data.map(event => {
         const eventDate = new Date(event.date);
         return {
@@ -41,10 +41,10 @@ const CalendaryPage = () => {
     try {
       if (editingEventId) {
         // Update existing event
-        await axios.put(`http://localhost:5000/api/events/${editingEventId}`, eventData);
+        await axios.put(`https://shehope-server-1.onrender.com/api/events/${editingEventId}`, eventData);
       } else {
         // Create new event
-        await axios.post('http://localhost:5000/api/events', eventData);
+        await axios.post('https://shehope-server-1.onrender.com/api/events', eventData);
       }
 
       resetForm(); // Reset form after submission
@@ -77,7 +77,7 @@ const CalendaryPage = () => {
   // Delete an event
   const handleDelete = async (eventId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/events/${eventId}`);
+      await axios.delete(`https://shehope-server-1.onrender.com/api/events/${eventId}`);
       fetchEvents(); // Fetch events after deletion
     } catch (error) {
       console.error('Error deleting event:', error);

@@ -30,11 +30,11 @@ const Recommendation = () => {
     }
 
     try {
-      const blogsRes = await axios.get(`http://localhost:5000/api/admin/blogs/`, {
+      const blogsRes = await axios.get(`https://shehope-server-1.onrender.com/api/admin/blogs/`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      const tipsRes = await axios.get(`http://localhost:5000/api/admin/tips`, {
+      const tipsRes = await axios.get(`https://shehope-server-1.onrender.com/api/admin/tips`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -54,11 +54,11 @@ const Recommendation = () => {
 
     try {
       if (type === "blogs") {
-        await axios.delete(`http://localhost:5000/api/admin/blogs/${id}`, {
+        await axios.delete(`https://shehope-server-1.onrender.com/api/admin/blogs/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
       } else {
-        await axios.delete(`http://localhost:5000/api/admin/tips/${id}`, {
+        await axios.delete(`https://shehope-server-1.onrender.com/admin/tips/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
       }
@@ -99,11 +99,11 @@ const Recommendation = () => {
   
       if (formData.id) {
         // Update the blog if an ID exists
-        await axios.put(`http://localhost:5000/api/admin/blogs/${formData.id}`, formDataToSend, { headers });
+        await axios.put(`https://shehope-server-1.onrender.com/api/admin/blogs/${formData.id}`, formDataToSend, { headers });
         toast.success('Blog updated successfully!');
       } else {
         // Create a new blog
-        await axios.post('http://localhost:5000/api/admin/blogs', formDataToSend, { headers });
+        await axios.post('https://shehope-server-1.onrender.com/api/admin/blogs', formDataToSend, { headers });
         toast.success('Blog created successfully!');
       }
   

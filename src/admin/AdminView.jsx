@@ -17,7 +17,7 @@ const AdminView = () => {
     const token = localStorage.getItem("adminToken");
 
     try {
-      const response = await fetch("http://localhost:5000/api/admin/users", {
+      const response = await fetch("https://shehope-server-1.onrender.com/api/admin/users", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -44,7 +44,7 @@ const AdminView = () => {
     const token = localStorage.getItem("adminToken");
 
     try {
-      const response = await fetch("http://localhost:5000/api/admin/donations", {
+      const response = await fetch("https://shehope-server-1.onrender.com/api/admin/donations", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -74,7 +74,7 @@ const AdminView = () => {
     const token = localStorage.getItem("adminToken");
 
     try {
-      const response = await fetch("http://localhost:5000/api/admin/posts", {
+      const response = await fetch("https://shehope-server-1.onrender.com/api/admin/posts", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

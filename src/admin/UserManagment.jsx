@@ -32,7 +32,7 @@ const UserManagement = () => {
       }
 
       try {
-        const response = await fetch("http://localhost:5000/api/admin/users", {
+        const response = await fetch("https://shehope-server-1.onrender.com/api/admin/users", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -85,7 +85,7 @@ const UserManagement = () => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/users/${id}`, {
+      const response = await fetch(`https://shehope-server-1.onrender.com/api/admin/users/${id}`, {
         method: "DELETE",
       });
 
@@ -113,7 +113,7 @@ const UserManagement = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/users/${id}`, {
+      const response = await fetch(`https://shehope-server-1.onrender.com/api/admin/users/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
