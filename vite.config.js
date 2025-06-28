@@ -8,5 +8,5 @@ export default defineConfig({
     tailwindcss(),  // Tailwind CSS support
     react(),        // React plugin support
   ],
-  base: "/Shehope/", // Base path for GitHub Pages deployment
+  
 });
